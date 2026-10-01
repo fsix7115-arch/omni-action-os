@@ -22,7 +22,9 @@ jobs:
           python-version: '3.12'
 
       - name: Doctor self-tests
-        run: python3 -m pytest tests/test_doctor.py -v
+        # unittest, not pytest: the suite is stdlib-only, so CI needs no
+        # install step and a contributor can run it with plain python3.
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
 
       - name: Doctor runs and reports no FAIL rows
         # The doctor must work on a machine we do not control. This proves it
