@@ -6,6 +6,7 @@ venv/
 node_modules/
 .next/
 .env
+.omni-sandbox/
 .env*.local
 prisma/*.db
 prisma/*.db-journal

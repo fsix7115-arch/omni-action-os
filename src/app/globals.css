@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --primary: 221 83% 45%;
+    --primary-foreground: 0 0% 100%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 42%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+    --border: 214 32% 88%;
+    --input: 214 32% 88%;
+    --ring: 221 83% 45%;
+    --success: 142 71% 38%;
+    --warning: 32 95% 44%;
+    --danger: 0 72% 51%;
+    --radius: 0.6rem;
+  }
+
+  .dark {
+    --background: 222 47% 8%;
+    --foreground: 210 40% 96%;
+    --card: 222 45% 11%;
+    --card-foreground: 210 40% 96%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 96%;
+    --border: 217 33% 22%;
+    --input: 217 33% 22%;
+    --ring: 217 91% 60%;
+    --success: 142 65% 45%;
+    --warning: 38 92% 50%;
+    --danger: 0 84% 60%;
+  }
+
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
+}
+
+@layer components {
+  .card { @apply rounded-lg border bg-card text-card-foreground; }
+  .badge { @apply inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium; }
+  .badge-ok { @apply border-transparent text-success; background: hsl(var(--success) / 0.12); }
+  .badge-warn { @apply border-transparent text-warning; background: hsl(var(--warning) / 0.14); }
+  .badge-bad { @apply border-transparent text-danger; background: hsl(var(--danger) / 0.12); }
+  .btn { @apply inline-flex items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium transition-colors disabled:opacity-50; }
+  .btn-primary { @apply btn bg-primary text-primary-foreground hover:opacity-90; }
+  .btn-ghost { @apply btn border bg-transparent hover:bg-accent; }
+  .input { @apply w-full rounded-md border bg-transparent px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring; }
+  .label { @apply text-xs font-medium text-muted-foreground; }
+}
