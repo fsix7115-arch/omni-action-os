@@ -12,4 +12,5 @@ prisma/*.db
 prisma/*.db-journal
 .DS_Store
 *.log
+tsconfig.tsbuildinfo
 reports/test-*.json
