@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+node_modules/
+.next/
+.env
+.env*.local
+prisma/*.db
+prisma/*.db-journal
+.DS_Store
+*.log
+reports/test-*.json

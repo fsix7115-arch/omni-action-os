@@ -1,0 +1,102 @@
+{
+  "overall": "WARN",
+  "profile": "B \u2014 local pro (postgres + redis + worker, via docker compose)",
+  "checks": [
+    {
+      "name": "operating system",
+      "status": "PASS",
+      "detail": "Linux 6.8.0-1064-azure (x86_64)",
+      "found": null,
+      "required": null,
+      "hint": null
+    },
+    {
+      "name": "cpu architecture",
+      "status": "PASS",
+      "detail": "x86_64",
+      "found": null,
+      "required": null,
+      "hint": null
+    },
+    {
+      "name": "disk space",
+      "status": "PASS",
+      "detail": "9.0 GB free, 65% used on /root/omni-action-os",
+      "found": null,
+      "required": null,
+      "hint": null
+    },
+    {
+      "name": "memory",
+      "status": "PASS",
+      "detail": "11.8 GB available",
+      "found": null,
+      "required": null,
+      "hint": null
+    },
+    {
+      "name": "git",
+      "status": "PASS",
+      "detail": "git version 2.43.0",
+      "found": "(2, 43, 0)",
+      "required": null,
+      "hint": null
+    },
+    {
+      "name": "node",
+      "status": "WARN",
+      "detail": "v26.7.0",
+      "found": "26.7",
+      "required": ">=20 (24 LTS recommended)",
+      "hint": "Node 26 is newer than the tested baseline (24 LTS). Usually fine, but not what we test."
+    },
+    {
+      "name": "python",
+      "status": "PASS",
+      "detail": "3.14.7",
+      "found": "3.14",
+      "required": ">=3",
+      "hint": null
+    },
+    {
+      "name": "package manager",
+      "status": "PASS",
+      "detail": "npm 11.19.0",
+      "found": "11.19.0",
+      "required": null,
+      "hint": null
+    },
+    {
+      "name": "docker",
+      "status": "PASS",
+      "detail": "Docker version 29.8.1-1, build 4a63305d74332de5ceba7fcbccbc3cbb7412f5ba",
+      "found": "29",
+      "required": ">=20",
+      "hint": null
+    },
+    {
+      "name": "postgres client",
+      "status": "WARN",
+      "detail": "psql not found",
+      "found": null,
+      "required": null,
+      "hint": "Optional locally. Required to inspect the production database."
+    },
+    {
+      "name": "playwright browsers",
+      "status": "PASS",
+      "detail": "installed under /root/.cache/ms-playwright",
+      "found": null,
+      "required": null,
+      "hint": null
+    },
+    {
+      "name": "ports",
+      "status": "WARN",
+      "detail": "in use: 3000",
+      "found": null,
+      "required": null,
+      "hint": "Free them, or pick different ports in .env."
+    }
+  ]
+}

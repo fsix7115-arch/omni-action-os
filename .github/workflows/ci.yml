@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  doctor:
+    name: Environment doctor
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Doctor self-tests
+        run: python3 -m pytest tests/test_doctor.py -v
+
+      - name: Doctor runs and reports no FAIL rows
+        # The doctor must work on a machine we do not control. This proves it
+        # executes end to end and finds nothing it considers fatal in CI.
+        run: python3 scripts/doctor.py --out reports/environment-ci.json
+
+      - name: Machine-readable output parses
+        run: |
+          python3 scripts/doctor.py --json > /tmp/doctor.json
+          python3 -c "
+          import json
+          d = json.load(open('/tmp/doctor.json'))
+          assert d['overall'] in ('PASS','WARN'), d
+          assert d['checks'], 'no checks emitted'
+          print('overall:', d['overall'], '| profile:', d['profile'])
+          "
+
+      - name: Upload doctor report
+        uses: actions/upload-artifact@v4
+        with:
+          name: doctor-report
+          path: reports/
+          retention-days: 7
+
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for committed secrets
+        run: |
+          if git ls-files -z | xargs -0 grep -InE \
+            '(sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY)' \
+            --exclude-dir=.git 2>/dev/null; then
+            echo "::error::possible secret committed — remove it and rotate the credential"
+            exit 1
+          fi
+          echo "no secrets found"
